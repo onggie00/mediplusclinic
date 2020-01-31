@@ -1,0 +1,31 @@
+.admin-content{
+    margin-left:17vw;
+    background: #F9F9F9 url(../images/admin/bg-admin.png) no-repeat;
+    background-size: cover;
+    min-height: 90vh;
+}
+main{
+    margin-left:17vw;
+}
+.navbar-logo{
+    background: #404E67 url(../images/admin/logo-white.png) no-repeat;
+    background-position: center;
+    background-size: 75% 30px;
+}
+.login-logo{
+    background: #404E67 url(../images/admin/logo.png) no-repeat;
+    height: 100px;
+    background-position: center;
+}
+.hidden{
+    display: none;
+}
+
+.large-table-container-2 {
+  overflow-x: scroll;
+  overflow-y: auto;
+  transform:rotateX(180deg);
+}
+.large-table-container-2 table {
+  transform:rotateX(180deg);
+}
