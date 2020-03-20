@@ -30,6 +30,8 @@ class Auth_login extends CI_Controller {
       $this->load->view('admin/login_dokter');
     }else if (isset($_REQUEST['btn_asisten'])) {
       $this->load->view('admin/login_asisten');
+    }else{
+      $this->load->view('admin/auth_login');
     }
   }
 	

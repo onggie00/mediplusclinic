@@ -16,7 +16,6 @@
     <meta name="description" content="#">
     <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
-    <!--<meta http-equiv="refresh" content="30"/>-->
     <!-- Favicon icon -->
     <link rel="icon" href="<?php echo base_url('resource_admin/'); ?>images/favicon.ico" type="image/x-icon">
     <!-- Google font-->

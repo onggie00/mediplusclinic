@@ -30,17 +30,22 @@ class Rumah_sakit extends CI_Controller {
                 $sub_array[] = $nomor;
                 $sub_array[] = $value->nama_klinik;
                 $sub_array[] = $value->phone;
-                $sub_array[] = $value->alamat;
-                if (!empty($value->img_file)) {
-                  $sub_array[] ='<img src="'.base_url("assets/image/klinik/".$value->img_file).'" alt="" width="100px" height="100px">';
+                $sub_array[] = $value->paket;
+                if ($value->tanggal_expired != null) {
+                  $sub_array[] = date("d M Y H:i:s",strtotime($value->tanggal_expired));
                 }else{
-                  $sub_array[] ='<img src="'.base_url("assets/image/klinik/kosong.png").'" alt="" width="100px" height="100px">';
+                  $sub_array[] = "Tidak ada";
                 }
                 $sub_array[] = $value->email;
                 $sub_array[] = $value->longitude;
                 $sub_array[] = $value->latitude;
                 $sub_array[] = $value->jam_buka_tutup;
                 $sub_array[] = $value->hari_buka_tutup;
+                if (!empty($value->img_file)) {
+                  $sub_array[] ='<img src="'.base_url("assets/image/klinik/".$value->img_file).'" alt="" width="100px" height="100px">';
+                }else{
+                  $sub_array[] ='<img src="'.base_url("assets/image/klinik/kosong.png").'" alt="" width="100px" height="100px">';
+                }
 
                 $sub_array[] ='
                 <button type="button" name="detail" id="'.$value->klinik_id.'" class="btn btn-sm btn-warning detail">
@@ -52,7 +57,7 @@ class Rumah_sakit extends CI_Controller {
                 <i class="mdi mdi-delete-circle ml-1"></i> Hapus</button>
                 <br><br>
                 <button type="button" name="biaya_klinik" id="'.$value->klinik_id.'" class="btn btn-sm btn-secondary biaya_klinik">
-                 Tambah Biaya Sewa</button>
+                 Tambah / Ubah Sewa</button>
                 ';
 
                 $data[] = $sub_array;
@@ -90,19 +95,59 @@ class Rumah_sakit extends CI_Controller {
               $this->image_lib->resize();
 
               $gambar=$gbr['file_name'];
+              
+              $nama_paket = null;
+              $paket = null;
+              if ($_REQUEST['paket_aktif'] == "1") {
+                $nama_paket = "1 Bulan";
+                $paket = date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran']."+1 month"));
+              }else if($_REQUEST['paket_aktif'] == "2"){
+                $nama_paket = "3 Bulan";
+                $paket = date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran']."+3 month"));
+              }else if($_REQUEST['paket_aktif'] == "3"){
+                $nama_paket = "6 Bulan";
+                $paket = date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran']."+6 month"));
+              }else if($_REQUEST['paket_aktif'] == "4"){
+                $nama_paket = "1 Tahun";
+                $paket = date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran']."+1 year"));
+              }
+              else if($_REQUEST['paket_aktif'] == "5"){
+                $nama_paket = "Selamanya";
+              }
               $data_klinik  = array(
                  "nama_klinik"=> $_REQUEST['nama_klinik'],
                  "img_file" => $gambar,
                  "phone" => $_REQUEST['phone'],
+                 "email" => $_REQUEST['email'],
                  "alamat" => $_REQUEST['alamat'],
                  "jam_buka_tutup" => $_REQUEST['jam_buka_tutup'],
                  "hari_buka_tutup" => $_REQUEST['hari_buka_tutup'],
                  "longitude" => $_REQUEST['longitude'],
                  "latitude" => $_REQUEST['latitude'],
+                 "tanggal_pembayaran" => date("Y-m-d H:i:s"),
+                 "biaya" => $_REQUEST['biaya'],
+                 "paket" => $nama_paket,
+                 "tanggal_expired" => $paket,
+                 "status_pembayaran" => "1",
                  "is_deleted" => "0"
               );
               $in = $this->mymodel->insert('klinik',$data_klinik);
-              if ($in) {
+              $data_trans_klinik = array(
+                "klinik_id" => $this->mymodel->getlast('klinik','klinik_id')->klinik_id,
+                "paket" => $nama_paket,
+                "tanggal_pembayaran" => date("Y-m-d H:i:s"),
+                "tanggal_expired" => $paket,
+                "biaya" => $_REQUEST['biaya'],
+                "status_pembayaran" => "1",
+                "created_at" => date('Y-m-d H:i:s'),
+                "is_deleted" => 0
+              );
+              $in2 = $this->mymodel->insert('trans_klinik',$data_trans_klinik);
+              $data2 = array(
+                "is_aktif" => 1
+              );
+              $up = $this->mymodel->update('dokter',$data2,"klinik_id",$this->mymodel->getlast('klinik','klinik_id')->klinik_id);
+              if ($in && $in2 && $up) {
                 $this->session->set_flashdata('success_msg','Data Berhasil Ditambahkan');
               }
       }else {

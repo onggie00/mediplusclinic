@@ -141,7 +141,12 @@ class Biaya_klinik extends CI_Controller {
         $nama_paket = "1 Tahun";
         $paket = "+1 year";
       }
-      $data = array(
+      else if($_REQUEST['paket_aktif'] == "5"){
+        $nama_paket = "Selamanya";
+        $paket = "";
+      }
+      if ($paket != "") {
+        $data = array(
         "klinik_id" => $_REQUEST['klinik_id'],
         "status_pembayaran" => $_REQUEST['status_pembayaran'],
         "tanggal_pembayaran" => $_REQUEST['tanggal_pembayaran'],
@@ -150,6 +155,17 @@ class Biaya_klinik extends CI_Controller {
         "paket" => $nama_paket,
         "created_at" => date('Y-m-d H:i:s')
         );
+      }else{
+        $data = array(
+        "klinik_id" => $_REQUEST['klinik_id'],
+        "status_pembayaran" => $_REQUEST['status_pembayaran'],
+        "tanggal_pembayaran" => $_REQUEST['tanggal_pembayaran'],
+        "tanggal_expired" => null,
+        "biaya" => $_REQUEST['biaya'],
+        "paket" => $nama_paket,
+        "created_at" => date('Y-m-d H:i:s')
+        );
+      }
       $data2 = array(
         "is_aktif" => 1
         );
@@ -183,15 +199,29 @@ class Biaya_klinik extends CI_Controller {
               $nama_paket = "1 Tahun";
               $paket = "+1 year";
             }
+            else if($_REQUEST['paket_aktif'] == "5"){
+              $nama_paket = "Selamanya";
+              $paket = "";
+            }
 
           if ($_REQUEST['status_pembayaran'] == "1") {
-            $data_update = array(
-            "status_pembayaran" => $_REQUEST['status_pembayaran'],
-            "tanggal_pembayaran" => $_REQUEST['tanggal_pembayaran'],
-            "biaya" => $_REQUEST['biaya'],
-            "tanggal_expired" => date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran'].$paket)),
-            "paket" => $nama_paket,
-            );
+            if ($paket != "") {
+              $data_update = array(
+              "status_pembayaran" => $_REQUEST['status_pembayaran'],
+              "tanggal_pembayaran" => $_REQUEST['tanggal_pembayaran'],
+              "biaya" => $_REQUEST['biaya'],
+              "tanggal_expired" => date("Y-m-d H:i:s",strtotime($_REQUEST['tanggal_pembayaran'].$paket)),
+              "paket" => $nama_paket,
+              );
+            }else{
+              $data_update = array(
+              "status_pembayaran" => $_REQUEST['status_pembayaran'],
+              "tanggal_pembayaran" => $_REQUEST['tanggal_pembayaran'],
+              "biaya" => $_REQUEST['biaya'],
+              "tanggal_expired" => null,
+              "paket" => $nama_paket,
+              );
+            }
           }else{
             $data_update = array(
             "status_pembayaran" => $_REQUEST['status_pembayaran'],

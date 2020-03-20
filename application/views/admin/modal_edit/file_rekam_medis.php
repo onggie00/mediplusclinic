@@ -20,6 +20,7 @@
         <select class="form-control" onchange="videocheck2(this);" name="type_file">
           <option value="0">Foto</option>
           <option value="1">Video</option>
+          <option value="2">Dokumen</option>
         </select>
         
       </div>
@@ -30,6 +31,10 @@
       <div class="col-md-4" style="display:none;" id="detail_video_file">
         <label for="cimg">Upload Video</label>
       <input class="form-control " name="video"  type="file" >
+      </div>
+      <div class="col-md-4" style="display:none;" id="detail_pdf_file">
+        <label for="cimg">Upload Dokumen</label>
+      <input class="form-control " name="pdf"  type="file" >
       </div>
     </div>
 
@@ -44,9 +49,15 @@
   function videocheck2(that) {
     if (that.value == "0") {
         document.getElementById("detail_video_file").style.display = "none";
+        document.getElementById("detail_pdf_file").style.display = "none";
         document.getElementById("detail_image_file").style.display = "block";
-    } else {
+    }else if (that.value == "2") {
+        document.getElementById("detail_video_file").style.display = "none";
+        document.getElementById("detail_pdf_file").style.display = "block";
+        document.getElementById("detail_image_file").style.display = "none";
+    }else {
         document.getElementById("detail_video_file").style.display = "block";
+        document.getElementById("detail_pdf_file").style.display = "none";
         document.getElementById("detail_image_file").style.display = "none";
     }
 }

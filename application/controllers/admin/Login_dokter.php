@@ -10,7 +10,14 @@ class Login_dokter extends CI_Controller {
   {
      $user = $this->session->userdata('dokter');
       if ($user!="") {
-        redirect('admin/dokter/dashboard/');
+        $get_dokter = $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),'row');
+        $cek_klinik = $this->mymodel->getbywhere('klinik','klinik_id',$get_dokter->klinik_id,'row');
+        if($cek_klinik->paket == "Selamanya" || date("Y-m-d H:i:s",strtotime($cek_klinik->tanggal_expired)) >= date("Y-m-d H:i:s")){
+            redirect('admin/dokter/dashboard/');
+        }
+        else if(date("Y-m-d H:i:s") > date("Y-m-d H:i:s",strtotime($cek_klinik->tanggal_expired))){
+          redirect('admin/dokter/rekam_medis/');
+        }
       }
       $data['err_msg'] =  $this->session->flashdata('msg');
     $this->load->view('admin/login_dokter',$data);
@@ -21,17 +28,12 @@ class Login_dokter extends CI_Controller {
     $cek = $this->dokter->checkusername($_REQUEST['username']);
     if ($cek!="") {
       $login = $this->dokter->do_login($_REQUEST['username'],$_REQUEST['password']);
-      if ($this->mymodel->getbywhere('dokter','username',$_REQUEST['username'],'row')->is_aktif == "0" ) {
-        echo "err2";
-        $this->session->set_flashdata('msg','Status Dokter Nonaktif, Silahkan Hubungi Administrator');
-      }else{
         if ($login!="") {
           $this->session->set_userdata('dokter',$_REQUEST['username']);
         }else {
           echo "err2";
           $this->session->set_flashdata('msg','Password Salah');
         }
-      }
     }else {
       echo "err1";
       $this->session->set_flashdata('msg','Username Tidak Ditemukan');

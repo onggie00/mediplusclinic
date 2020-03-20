@@ -75,7 +75,7 @@
       <input class="form-control " name="dokter_id" type="hidden" value="<?php echo $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),'row')->dokter_id; ?>" >
     </div>
     <div class="form-group row">
-      <div class="col-md-4 hidden">
+      <div class="col-md-4">
         <label for="cphone">Tipe File (required)</label>
         <select class="form-control" name="type_file">
           <option value="0">Foto</option>
@@ -83,13 +83,13 @@
         </select>
         <label for="cimg"><b> Untuk File Video, Diharuskan upload gambar Thumbnail juga </b></label>
       </div>
-      <div class="col-md-6">
-        <label for="cimg">Upload File</label>
-      <input class="form-control " name="img_file" multiple type="file" >
+      <div class="col-md-4">
+        <label for="cimg">Upload Gambar</label>
+      <input class="form-control " name="img_file" type="file" >
       </div>
-      <div class="col-md-4 hidden">
+      <div class="col-md-4">
         <label for="cimg">Upload Video</label>
-      <input class="form-control " name="video" multiple type="file" >
+      <input class="form-control " name="video" type="file" >
       </div>
     </div>
 

@@ -147,7 +147,8 @@
                       <th>Nomor</th>
                       <th>Rumah Sakit</th>
                       <th>Telepon</th>
-                      <th>Alamat</th>
+                      <th>Nama Paket</th>
+                      <th>Tanggal Expired</th>
                       <th>Foto Rumah Sakit</th>
                       <th>Email</th>
                       <th>Longitude</th>

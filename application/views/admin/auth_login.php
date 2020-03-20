@@ -72,17 +72,6 @@
                                     <div class="col-md-12 text-left">
                                         <h5>Pilih Login Sebagai : </h5>
                                     </div>
-                                    <div class="col-md-12">
-                                            <?php if (isset($err_msg)): ?>
-                                                <br>
-                                                <div class="alert alert-danger icons-alert mb-0" role="alert">
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <i class="icofont icofont-close-line-circled"></i>
-                                                    </button>
-                                                    <p> <?php echo $err_msg; ?> </p>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
                                     <div class="row m-t-30">
                                             <div class="col-md-6">
                                                 <button type="submit" name="btn_admin" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">Administrator</button>

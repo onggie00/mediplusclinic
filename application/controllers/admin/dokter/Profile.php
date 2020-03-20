@@ -9,7 +9,7 @@ class Profile extends CI_Controller {
     $this->is_login();
     $msg = $this->session->flashdata('msg');
     $this->session->set_flashdata('msg',$msg);
-    $data['title_page'] = "Profile Dokter";
+    $data['title_page'] = "Manajemen Jadwal &amp; Dokter";
     $data['nama_lengkap'] = $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),"row")->nama_dokter;
     $data['foto_profil'] = $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),"row")->img_file;
     $data['err_msg'] =  $this->session->flashdata('msg');

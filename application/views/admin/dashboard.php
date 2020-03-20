@@ -101,7 +101,8 @@
           <tbody>
             <?php 
             $nmr = 1;
-            $get_klinik = $this->mymodel->getbywhere('klinik',"is_deleted='0' and status_pembayaran=",'1','result');
+            $get_klinik = $this->mymodel->getbywhere('klinik',"is_deleted='0' and paket != 'Selamanya' and status_pembayaran=",'1','result');
+            //echo $this->db->last_query();
                 foreach ($get_klinik as $key => $value) {
                   $tgl_expired = date_create(date("Y-m-d",strtotime($value->tanggal_expired)));
                   $today = date_create(date("Y-m-d"));

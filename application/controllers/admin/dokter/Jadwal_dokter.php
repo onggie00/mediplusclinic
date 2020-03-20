@@ -108,7 +108,6 @@ class Jadwal_dokter extends CI_Controller {
           "ruangan" => $_REQUEST['ruangan']
           );
         if ($data_update['status_aktif'] == "0") {
-          //status_aktif = kehadiran
           $data_update = array(
             "status_aktif" => $_REQUEST['status_aktif'],
             "batas_antrian" => "0",

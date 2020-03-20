@@ -70,8 +70,8 @@ class Transaksi extends CI_Controller {
   {
     $this->load->model(array('Transaksi_datatable'));
     $fetch_data = $this->Transaksi_datatable->make_datatables();
-            $data = array();
-            $nomor=1;
+           $data = array();
+           $nomor=1;
             $get_dokter = $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),'row');
            foreach($fetch_data as $value)
            {
@@ -96,10 +96,10 @@ class Transaksi extends CI_Controller {
                 $sub_array[] = "Rp. ".number_format($value->biaya,0,"",".");
                 $sub_array[] ='
                 <button type="button" name="update" id="'.$value->hantrian_dokter_id.'" class="btn btn-sm btn-primary update">
-                 Ubah</button>
-                <br/><br/>
+                <i class="mdi mdi-pencil-circle ml-1"></i> Ubah</button>
+                <br><br>
                 <button type="button" name="delete" id="'.$value->hantrian_dokter_id.'" class="btn btn-sm btn-danger delete">
-                 Hapus</button> <br/>';
+                <i class="mdi mdi-delete-circle ml-1"></i> Hapus</button>';
                 $data[] = $sub_array;
                 $nomor++;
             }

@@ -82,6 +82,7 @@ class Dashboard extends CI_Controller {
                 $sub_array[] = $get_pasien->nama_lengkap;
 
                 $data[] = $sub_array;
+
             }
            }
            $output = array(

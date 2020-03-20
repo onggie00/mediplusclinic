@@ -19,7 +19,7 @@ class Chat extends CI_Controller {
 			'body' => $desc,
 			'title' => $title
 		);
-		
+
 		$fcmFields = array(
 			'to' => $id_fcm,
 			'notification' => $Msg,
@@ -74,6 +74,8 @@ class Chat extends CI_Controller {
 			 'pasien_id' => $_REQUEST['pasien_id'],
 			 'dokter_id' => $mydata->dokter_id,
 			 'chat' => $_REQUEST['pesan'],
+ 		  'url_galery' => $_REQUEST['url_galery'],
+			'galery_type' =>  $_REQUEST['galery_type'],
 			 'customer_is_sender'=>0,
 			 'created_at' => date('Y-m-d H:i:s')
 		 );
@@ -88,6 +90,8 @@ class Chat extends CI_Controller {
 		$dateTime = date("YmdHis");
 		$test = [
 			'chat' => $_REQUEST['pesan'],
+		  'url_galery' => $_REQUEST['url_galery'],
+			'type' =>  $_REQUEST['galery_type'],
 		 	'customer_is_sender'=>"0",
 		];
 		$firebase->set("C".$mydata->dokter_id . '/' . $_REQUEST['pasien_id'] . '/' . $dateTime, $test);

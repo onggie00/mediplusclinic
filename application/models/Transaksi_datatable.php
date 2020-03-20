@@ -10,7 +10,7 @@ Class Transaksi_datatable extends CI_Model
           $this->db->select('t.*','p.nama_lengkap');
           $this->db->from('hantrian_dokter as t');
           $this->db->join('dokter as d', 'd.dokter_id = t.dokter_id','left');
-          $this->db->join('pasien as p', 'p.pasien_id = t.pasien_id','left');
+          $this->db->join('pasien as p', 't.pasien_id = p.pasien_id','left');
           $this->db->like('d.nama_dokter', $term);
           $this->db->or_like('d.ruangan', $term);
           $this->db->or_like('p.nama_lengkap', $term);

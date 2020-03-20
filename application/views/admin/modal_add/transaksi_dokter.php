@@ -23,8 +23,8 @@
       <input class="form-control " name="tanggal_pembayaran" type="date" >
     </div>
     <div class="form-group">
-      <label for="biaya">Biaya Pembayaran (required)</label>
-      <input class="form-control " type="number" min="0" name="biaya_pembayaran" required>
+      <label for="biaya">Biaya Pembayaran </label>
+      <input class="form-control " type="number" min="0" name="biaya_pembayaran" >
     </div>
     <div class="form-group text-right">
       <input class="btn btn-default" type="button" value="Batal" data-dismiss="modal">

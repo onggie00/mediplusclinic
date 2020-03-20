@@ -38,7 +38,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('resource_admin/'); ?>css/style.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('resource_admin/'); ?>css/jquery.mCustomScrollbar.css">
 </head>
-
 <body>
     <!-- Pre-loader start -->
     <div class="theme-loader ">
@@ -143,64 +142,86 @@
                     <nav class="pcoded-navbar">
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="pcoded-navigatio-lavel">Mediplus Navigation</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/dashboard'); ?>">
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Dashboard Antrian</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/jadwal_dokter'); ?>" >
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Manajemen Jadwal &amp; Dokter</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/rekam_medis'); ?>" >
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Rekam Medis Pasien</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/manajemen_asisten'); ?>" >
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Manajemen Asisten Dokter</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/transaksi'); ?>" >
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Transaksi</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="<?php echo site_url('admin/dokter/chat'); ?>">
-                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                                        <span class="pcoded-mtext">Chat</span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
-                                        <span class="pcoded-mtext">Notifikasi Pasien</span>
-                                        <span class="pcoded-badge label label-warning hidden">NEW</span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="<?php echo site_url('admin/dokter/notifikasi_dokter'); ?>" >
-                                                <span class="pcoded-mtext">Pasien Berlangganan</span>
+                            <?php 
+                                $get_dokter = $this->mymodel->getbywhere('dokter','username',$this->session->userdata('dokter'),'row');
+                                $cek_klinik = $this->mymodel->getbywhere('klinik','klinik_id',$get_dokter->klinik_id,'row');
+                                if ($cek_klinik->paket == "Selamanya" || date("Y-m-d H:i:s",strtotime($cek_klinik->tanggal_expired)) >= date("Y-m-d H:i:s")) {
+                                ?>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/dashboard'); ?>">
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Dashboard Antrian</span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="<?php echo site_url('admin/dokter/notifikasi_dokter_antrian'); ?>" >
-                                                <span class="pcoded-mtext">Antrian Pasien</span>
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/jadwal_dokter'); ?>" >
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Manajemen Jadwal &amp; Dokter</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/rekam_medis'); ?>" >
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Rekam Medis Pasien</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/manajemen_asisten'); ?>" >
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Manajemen Asisten Dokter</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/transaksi'); ?>" >
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Transaksi</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/chat'); ?>">
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Chat</span>
+                                            </a>
+                                        </li>
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="feather icon-sidebar"></i></span>
+                                                <span class="pcoded-mtext">Notifikasi Pasien</span>
+                                                <span class="pcoded-badge label label-warning hidden">NEW</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li class=" ">
+                                                    <a href="<?php echo site_url('admin/dokter/notifikasi_dokter'); ?>" >
+                                                        <span class="pcoded-mtext">Pasien Berlangganan</span>
+                                                    </a>
+                                                </li>
+                                                <li class=" ">
+                                                    <a href="<?php echo site_url('admin/dokter/notifikasi_dokter_antrian'); ?>" >
+                                                        <span class="pcoded-mtext">Antrian Pasien</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                            <?php
+                                }
+                                else if(date("Y-m-d H:i:s") > date("Y-m-d H:i:s",strtotime($cek_klinik->tanggal_expired))){
+                            ?>
+                                    <ul class="pcoded-item pcoded-left-item">
+                                        <li class="">
+                                            <a href="<?php echo site_url('admin/dokter/rekam_medis'); ?>" >
+                                                <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                                <span class="pcoded-mtext">Rekam Medis Pasien</span>
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
-                                
-                            </ul>
+                            <?php
+                                }
+                             ?>
+                            
+
                         </div>
                     </nav>
                 </div>

@@ -216,6 +216,15 @@ margin-top:30px;
                             <input type="text" class="write_msg" id="msg" placeholder="Tulis Pesan" />
                             <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                           </div>
+                            <!--
+                          <br>
+
+                          <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+                              <input type="file" name="galery_chat" id="galery_chat" class="form-control" accept="image/jpeg, image/jpg, image/x-png, image/png, video/mp4,video/x-m4v,video/*"/>
+                              <br>
+                              <input type="submit" value="Send File" id="btnSubmit" class="btn btn-success"/>
+                          </form>
+                           -->
                         </div>
                       </div>
                     </div>
@@ -245,6 +254,52 @@ margin-top:30px;
   </script>
   <script >
   $(document).ready(function(){
+
+    $("#btnSubmit").click(function(event) {
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+        // Get form
+        var form = $('#fileUploadForm')[0];
+		// Create an FormData object
+        var data = new FormData(form);
+		// If you want to add an extra field for the FormData
+        data.append("CustomField", "This is some extra data, testing");
+		// disabled the submit button
+        $("#btnSubmit").prop("disabled", true);
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "http://mediplusclinic.co.id/api/galery_chat",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 6000000,
+            success: function (data) {
+                if (data.status == 1){
+                  console.log("SUCCESS : ", data.status, data.message, data.data["url_galery"], data.data["galery_type"]);
+
+                  $.post( "<?php echo site_url('admin/dokter/chat/insertchat') ?>",{
+                    pasien_id: <?php echo $_REQUEST['id'] ?>,
+                    pesan:$('#msg').val(),
+                    url_galery: data.data["url_galery"],
+                    galery_type: data.data["galery_type"]
+                  })
+                  .done(function( data1 ) {
+                        console.log("SUCCESS", data1);
+                  });
+                }
+                $('#galery_chat').val("");
+                $("#btnSubmit").prop("disabled", false);
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+                $("#btnSubmit").prop("disabled", false);
+
+            }
+        });
+
+    });
 
        var dataTable = $('#data').DataTable({
          "dom": 'Bfrtip',
@@ -366,9 +421,12 @@ margin-top:30px;
                       //Do Stuff, submit, etc..
                       $.post( "<?php echo site_url('admin/dokter/chat/insertchat') ?>",{
                         pasien_id: <?php echo $_REQUEST['id'] ?>,
-                        pesan:$('#msg').val()
+                        pesan:$('#msg').val(),
+                        url_galery: "",
+                        galery_type: "0"
                       })
                       .done(function( data ) {
+                        console.log(data);
                         // firebase.database().ref('C<?php echo $mydata->dokter_id."/".$_REQUEST['id']."/".date("YmdHis") ?>/').set({
                         //     customer_is_sender: "0",
                         //     chat:msgtext

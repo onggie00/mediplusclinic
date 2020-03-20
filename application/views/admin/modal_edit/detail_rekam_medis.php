@@ -88,6 +88,22 @@
                        ';
                   echo "</td>";
                 }
+                else if($value->type_file == "2"){
+                  echo "<td> Dokumen </td>";
+                  echo "<td><a href='".base_url('assets/image/data_scan/'.$value->pdf_file)."' target='_blank'>Lihat disini</a></td>";
+                  echo "<td> ".$tanggal." </td>";
+                  echo "<td>";
+                  echo '
+                  <button type="button" name="update_detail" id="'.$value->detail_data_scan_id.'" class="btn btn-sm btn-primary update_detail">
+                     Ubah File</button>
+                  <button type="button" name="delete_detail" id="'.$value->detail_data_scan_id.'" class="btn btn-sm btn-danger delete_detail">
+                     Hapus File</button>
+                  <br/>
+                  <a href="'.base_url('assets/image/data_scan/'.$value->pdf_file).'" target="_blank"><button type="button" name="download" id="'.$value->detail_data_scan_id.'" class="btn btn-sm btn-warning download_detail">
+                      Download File</button></a>
+                       ';
+                  echo "</td>";
+                }
                 
                 echo "</tr>";
               $nmr++;
@@ -127,6 +143,7 @@
         <select class="form-control" onchange="videocheck(this);" name="type_file">
           <option value="0">Foto</option>
           <option value="1">Video</option>
+          <option value="2">Dokumen</option>
         </select>
         
       </div>

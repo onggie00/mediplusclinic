@@ -39,6 +39,19 @@
       <input class="form-control " name="latitude" type="text" value="<?php echo $data->latitude; ?>">
       </div>
     </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <p class="h6">Untuk Biaya dan Pilihan Paket, Dapat Diubah melalui Action <span class="font-weight-bold font-italic">Tambah/Ubah Sewa</span></p><hr size="1px" width="100%">
+      </div>
+      <div class="col-md-6">
+        <label for="biaya">Biaya Pembayaran </label>
+      <input class="form-control " type="number" min="0" name="biaya" value="<?php echo $data->biaya; ?>" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="uname">Pilih Paket Masa Aktif </label>
+        <input class="form-control " name="paket_aktif" type="text" value="<?php echo $data->paket; ?>" disabled>
+      </div>
+    </div>
     <div class="form-group">
       <label for="cemail">Alamat </label>
       <textarea class="form-control" name="alamat" style="resize:none;"><?php echo $data->alamat; ?></textarea>

@@ -90,7 +90,7 @@
                     <tr>
                       <th>Nomor</th>
                       <th>Nama Lengkap</th>
-                      <th>Rumah Sakit / Klinik</th>
+                      <th>Rumah Sakit</th>
                       <th>Ruangan</th>
                       <th>Nama Dokter</th>
                       <th>Tanggal</th>
@@ -147,7 +147,6 @@
             "scrollX":true,
             "processing":true,
             "serverSide":true,
-            "pageLength": 10,
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "order":[],
             "ajax":{
@@ -160,6 +159,15 @@
                       "orderable":false,
                  },
             ],
+            "initComplete": function(settings, json) {
+                $(".current").addClass("btn btn-primary");
+              $(".current").removeClass("paginate_button");
+            },
+            "fnDrawCallback": function( oSettings ) {
+
+                  $(".current").addClass("btn btn-primary");
+                $(".current").removeClass("paginate_button");
+            }
        });
        $(document).on("click", ".delete", function(e) {
             var id = $(this).attr("id");

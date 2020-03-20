@@ -25,11 +25,12 @@
         <input class="form-control " name="tanggal_pembayaran" type="date" required>
       </div>
       <div class="col-md-6">
-        <label for="uname">Pilih Paket Masa AKtif (required)</label>
+        <label for="uname">Pilih Paket Masa Aktif (required)</label>
         <select required name="paket_aktif" class="form-control">
           <option value="1">1 Bulan</option>
           <option value="2">3 Bulan</option>
           <option value="4">1 Tahun</option>
+          <option value="5">Selamanya</option>
         </select>
       </div>
     </div>

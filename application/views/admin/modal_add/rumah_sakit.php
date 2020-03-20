@@ -38,6 +38,21 @@
       <input class="form-control " name="latitude" type="text" required>
       </div>
     </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="biaya">Biaya Pembayaran (required)</label>
+        <input class="form-control " type="number" min="0" name="biaya" required>
+      </div>
+      <div class="col-md-6">
+        <label for="uname">Pilih Paket Masa Aktif (required)</label>
+        <select required name="paket_aktif" class="form-control">
+          <option value="1">1 Bulan</option>
+          <option value="2">3 Bulan</option>
+          <option value="4">1 Tahun</option>
+          <option value="5">Selamanya</option>
+        </select>
+      </div>
+    </div>
     <div class="form-group">
       <label for="cemail">Alamat </label>
       <textarea class="form-control" name="alamat" style="resize:none;"></textarea>
